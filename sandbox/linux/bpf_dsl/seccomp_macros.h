@@ -343,6 +343,47 @@ struct regs_struct {
 #define SECCOMP_PT_PARM4(_regs) (_regs).regs[3]
 #define SECCOMP_PT_PARM5(_regs) (_regs).regs[4]
 #define SECCOMP_PT_PARM6(_regs) (_regs).regs[5]
+
+#elif defined(__riscv) && (__riscv_xlen == 64)
+struct regs_struct {
+  unsigned long regs[32];
+};
+
+#define SECCOMP_ARCH AUDIT_ARCH_RISCV64
+
+#define SECCOMP_REG(_ctx, _reg) ((_ctx)->uc_mcontext.__gregs[_reg])
+
+#define SECCOMP_RESULT(_ctx) SECCOMP_REG(_ctx, REG_A0)
+#define SECCOMP_SYSCALL(_ctx) SECCOMP_REG(_ctx, REG_A0+7)
+#define SECCOMP_IP(_ctx) (_ctx)->uc_mcontext.__gregs[REG_PC]
+#define SECCOMP_PARM1(_ctx) SECCOMP_REG(_ctx, REG_A0)
+#define SECCOMP_PARM2(_ctx) SECCOMP_REG(_ctx, REG_A0+1)
+#define SECCOMP_PARM3(_ctx) SECCOMP_REG(_ctx, REG_A0+2)
+#define SECCOMP_PARM4(_ctx) SECCOMP_REG(_ctx, REG_A0+3)
+#define SECCOMP_PARM5(_ctx) SECCOMP_REG(_ctx, REG_A0+4)
+#define SECCOMP_PARM6(_ctx) SECCOMP_REG(_ctx, REG_A0+5)
+
+#define SECCOMP_NR_IDX (offsetof(struct arch_seccomp_data, nr))
+#define SECCOMP_ARCH_IDX (offsetof(struct arch_seccomp_data, arch))
+#define SECCOMP_IP_MSB_IDX \
+  (offsetof(struct arch_seccomp_data, instruction_pointer) + 4)
+#define SECCOMP_IP_LSB_IDX \
+  (offsetof(struct arch_seccomp_data, instruction_pointer) + 0)
+#define SECCOMP_ARG_MSB_IDX(nr) \
+  (offsetof(struct arch_seccomp_data, args) + 8 * (nr) + 4)
+#define SECCOMP_ARG_LSB_IDX(nr) \
+  (offsetof(struct arch_seccomp_data, args) + 8 * (nr) + 0)
+
+#define SECCOMP_PT_RESULT(_regs) (_regs).regs[REG_A0]
+#define SECCOMP_PT_SYSCALL(_regs) (_regs).regs[REG_A0+7]
+#define SECCOMP_PT_IP(_regs) (_regs).regs[REG_PC]
+#define SECCOMP_PT_PARM1(_regs) (_regs).regs[REG_A0]
+#define SECCOMP_PT_PARM2(_regs) (_regs).regs[REG_A0+1]
+#define SECCOMP_PT_PARM3(_regs) (_regs).regs[REG_A0+2]
+#define SECCOMP_PT_PARM4(_regs) (_regs).regs[REG_A0+3]
+#define SECCOMP_PT_PARM5(_regs) (_regs).regs[REG_A0+4]
+#define SECCOMP_PT_PARM6(_regs) (_regs).regs[REG_A0+5]
+
 #else
 #error Unsupported target platform
 

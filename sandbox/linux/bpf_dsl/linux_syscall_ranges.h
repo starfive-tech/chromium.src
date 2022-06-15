@@ -56,6 +56,12 @@
 #define MAX_PUBLIC_SYSCALL __NR_syscalls
 #define MAX_SYSCALL MAX_PUBLIC_SYSCALL
 
+#elif defined(__riscv) && (__riscv_xlen == 64)
+
+#define MIN_SYSCALL 0u
+#define MAX_PUBLIC_SYSCALL 1024u
+#define MAX_SYSCALL MAX_PUBLIC_SYSCALL
+
 #else
 #error "Unsupported architecture"
 #endif

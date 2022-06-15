@@ -52,7 +52,7 @@ class SANDBOX_EXPORT SyscallSets {
 #endif
 
 #if defined(__x86_64__) || defined(__arm__) || defined(__mips__) || \
-    defined(__aarch64__)
+    defined(__aarch64__) || defined(__riscv)
   static bool IsNetworkSocketInformation(int sysno);
 #endif
 
@@ -79,18 +79,21 @@ class SANDBOX_EXPORT SyscallSets {
   static bool IsAsyncIo(int sysno);
   static bool IsKeyManagement(int sysno);
 #if defined(__x86_64__) || defined(__arm__) || defined(__aarch64__) || \
-    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS))
+    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS)) ||    \
+    defined(__riscv)
   static bool IsSystemVSemaphores(int sysno);
 #endif
 #if defined(__i386__) || defined(__x86_64__) || defined(__arm__) || \
     defined(__aarch64__) ||                                         \
-    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS))
+    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS)) || \
+    defined(__riscv)
   // These give a lot of ambient authority and bypass the setuid sandbox.
   static bool IsSystemVSharedMemory(int sysno);
 #endif
 
 #if defined(__x86_64__) || defined(__arm__) || defined(__aarch64__) || \
-    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS))
+    (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS)) || \
+    defined(__riscv)
   static bool IsSystemVMessageQueue(int sysno);
 #endif
 
@@ -117,6 +120,9 @@ class SANDBOX_EXPORT SyscallSets {
   static bool IsMipsPrivate(int sysno);
   static bool IsMipsMisc(int sysno);
 #endif  // defined(__mips__)
+#if defined(__riscv)
+  static bool IsRiscvPrivate(int sysno);
+#endif
 };
 
 }  // namespace sandbox.

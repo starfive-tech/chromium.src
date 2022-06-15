@@ -61,6 +61,9 @@ bool IsBaselinePolicyAllowed(int sysno) {
 #if defined(__mips__)
          SyscallSets::IsMipsPrivate(sysno) ||
 #endif
+#if defined(__riscv)
+         SyscallSets::IsRiscvPrivate(sysno) ||
+#endif
          SyscallSets::IsAllowedOperationOnFd(sysno);
   // clang-format on
 }
@@ -198,7 +201,7 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
     return RestrictFcntlCommands();
 #endif
 
-#if !defined(__aarch64__)
+#if !defined(__aarch64__) && !defined(__riscv)
   // fork() is never used as a system call (clone() is used instead), but we
   // have seen it in fallback code on Android.
   if (sysno == __NR_fork) {
@@ -253,7 +256,7 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
   }
 
 #if defined(__i386__) || defined(__x86_64__) || defined(__mips__) || \
-    defined(__aarch64__)
+    defined(__aarch64__) || defined(__riscv)
   if (sysno == __NR_mmap)
     return RestrictMmapFlags();
 #endif
@@ -274,7 +277,7 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
     return RestrictPrctl();
 
 #if defined(__x86_64__) || defined(__arm__) || defined(__mips__) || \
-    defined(__aarch64__)
+    defined(__aarch64__) || defined(__riscv)
   if (sysno == __NR_socketpair) {
     // Only allow AF_UNIX, PF_UNIX. Crash if anything else is seen.
     static_assert(AF_UNIX == PF_UNIX,

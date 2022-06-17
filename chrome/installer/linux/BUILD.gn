@@ -462,6 +462,8 @@ template("linux_package") {
       deb_arch = "mipsel"
     } else if (current_cpu == "mips64el") {
       deb_arch = "mips64el"
+    } else if (current_cpu == "riscv64") {
+      deb_arch = "riscv64"
     } else {
       assert(false, "Linux installer not configured for this architecture.")
     }
@@ -511,6 +513,8 @@ template("linux_package") {
         rpm_arch = "mipsel"
       } else if (current_cpu == "mips64el") {
         rpm_arch = "mips64el"
+      } else if (current_cpu == "riscv64") {
+        rpm_arch = "riscv64"
       } else {
         assert(false, "Linux installer not configured for this architecture.")
       }
@@ -564,6 +568,8 @@ template("linux_package") {
           snap_arch = "armhf"
         } else if (current_cpu == "arm64") {
           snap_arch = "arm64"
+        } else if (current_cpu == "riscv64") {
+          snap_arch = "riscv64"
         } else {
           assert(false, "Linux installer not configured for this architecture.")
         }

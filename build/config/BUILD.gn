@@ -224,6 +224,7 @@ config("default_libs") {
       "dl",
       "pthread",
       "rt",
+      "atomic",
     ]
   }
 }

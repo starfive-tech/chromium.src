@@ -174,6 +174,22 @@ void InitializeCPUContextMIPS(
 
 #endif  // ARCH_CPU_MIPS_FAMILY || DOXYGEN
 
+#if defined(ARCH_CPU_RISCV_FAMILY) || DOXYGEN
+
+//! \brief Initializes a CPUContextRISCV structure from native context
+//!     structures on Linux.
+//!
+//! \param[in] thread_context The native thread context.
+//! \param[in] float_context The native float context.
+//! \param[out] context The CPUContextRISCV structure to initialize.
+template <typename Traits>
+void InitializeCPUContextRISCV(
+    const typename Traits::SignalThreadContext& thread_context,
+    const typename Traits::SignalFloatContext& float_context,
+    typename Traits::CPUContext* context);
+
+#endif  // ARCH_CPU_RISCV_FAMILY || DOXYGEN
+
 }  // namespace internal
 }  // namespace crashpad
 

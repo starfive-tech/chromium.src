@@ -397,6 +397,50 @@ bool GetThreadArea64(pid_t tid,
   *address = FromPointerCast<LinuxVMAddress>(result);
   return true;
 }
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+
+template <typename Destination>
+bool GetRegisterSet(pid_t tid, int set, Destination* dest, bool can_log) {
+  iovec iov;
+  iov.iov_base = dest;
+  iov.iov_len = sizeof(*dest);
+  if (ptrace(PTRACE_GETREGSET, tid, reinterpret_cast<void*>(set), &iov) != 0) {
+    PLOG_IF(ERROR, can_log) << "ptrace";
+    return false;
+  }
+  if (iov.iov_len != sizeof(*dest)) {
+    LOG_IF(ERROR, can_log) << "Unexpected registers size";
+    return false;
+  }
+  return true;
+}
+
+bool GetFloatingPointRegisters32(pid_t tid,
+                                 FloatContext* context,
+                                 bool can_log) {
+  return false;
+}
+
+bool GetFloatingPointRegisters64(pid_t tid,
+                                 FloatContext* context,
+                                 bool can_log) {
+  return GetRegisterSet(tid, NT_PRFPREG, &context->f64.f, can_log);
+}
+
+bool GetThreadArea32(pid_t tid,
+                     const ThreadContext& context,
+                     LinuxVMAddress* address,
+                     bool can_log) {
+  return false;
+}
+
+bool GetThreadArea64(pid_t tid,
+                     const ThreadContext& context,
+                     LinuxVMAddress* address,
+                     bool can_log) {
+  *address = context.t64.tp;
+  return true;
+}
 
 #else
 #error Port.

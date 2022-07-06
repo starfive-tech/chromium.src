@@ -205,6 +205,9 @@ CPUArchitecture SystemSnapshotLinux::GetCPUArchitecture() const {
 #elif defined(ARCH_CPU_MIPS_FAMILY)
   return process_reader_->Is64Bit() ? kCPUArchitectureMIPS64EL
                                     : kCPUArchitectureMIPSEL;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+  return process_reader_->Is64Bit() ? kCPUArchitectureRISCV64
+	                            : kCPUArchitectureRISCV;
 #else
 #error port to your architecture
 #endif
@@ -219,6 +222,9 @@ uint32_t SystemSnapshotLinux::CPURevision() const {
   return 0;
 #elif defined(ARCH_CPU_MIPS_FAMILY)
   // Not implementable on MIPS
+  return 0;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+  // Not implementable on RISCV
   return 0;
 #else
 #error port to your architecture
@@ -239,6 +245,9 @@ std::string SystemSnapshotLinux::CPUVendor() const {
   return std::string();
 #elif defined(ARCH_CPU_MIPS_FAMILY)
   // Not implementable on MIPS
+  return std::string();
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+  // Not implementable on RISCV
   return std::string();
 #else
 #error port to your architecture
@@ -372,6 +381,9 @@ bool SystemSnapshotLinux::NXEnabled() const {
   return false;
 #elif defined(ARCH_CPU_MIPS_FAMILY)
   // Not implementable on MIPS
+  return false;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+  // Not implementable on RISCV
   return false;
 #else
 #error Port.

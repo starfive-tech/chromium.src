@@ -79,6 +79,40 @@ union ThreadContext {
     uint32_t cp0_status;
     uint32_t cp0_cause;
     uint32_t padding1_;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+    // Reflects user_regs_struct in asm/ptrace.h.
+    uint32_t pc;
+    uint32_t ra;
+    uint32_t sp;
+    uint32_t gp;
+    uint32_t tp;
+    uint32_t t0;
+    uint32_t t1;
+    uint32_t t2;
+    uint32_t s0;
+    uint32_t s1;
+    uint32_t a0;
+    uint32_t a1;
+    uint32_t a2;
+    uint32_t a3;
+    uint32_t a4;
+    uint32_t a5;
+    uint32_t a6;
+    uint32_t a7;
+    uint32_t s2;
+    uint32_t s3;
+    uint32_t s4;
+    uint32_t s5;
+    uint32_t s6;
+    uint32_t s7;
+    uint32_t s8;
+    uint32_t s9;
+    uint32_t s10;
+    uint32_t s11;
+    uint32_t t3;
+    uint32_t t4;
+    uint32_t t5;
+    uint32_t t6;
 #else
 #error Port.
 #endif  // ARCH_CPU_X86_FAMILY
@@ -132,6 +166,40 @@ union ThreadContext {
     uint64_t cp0_badvaddr;
     uint64_t cp0_status;
     uint64_t cp0_cause;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+    // Reflects user_regs_struct in asm/ptrace.h.
+    uint64_t pc;
+    uint64_t ra;
+    uint64_t sp;
+    uint64_t gp;
+    uint64_t tp;
+    uint64_t t0;
+    uint64_t t1;
+    uint64_t t2;
+    uint64_t s0;
+    uint64_t s1;
+    uint64_t a0;
+    uint64_t a1;
+    uint64_t a2;
+    uint64_t a3;
+    uint64_t a4;
+    uint64_t a5;
+    uint64_t a6;
+    uint64_t a7;
+    uint64_t s2;
+    uint64_t s3;
+    uint64_t s4;
+    uint64_t s5;
+    uint64_t s6;
+    uint64_t s7;
+    uint64_t s8;
+    uint64_t s9;
+    uint64_t s10;
+    uint64_t s11;
+    uint64_t t3;
+    uint64_t t4;
+    uint64_t t5;
+    uint64_t t6;
 #else
 #error Port.
 #endif  // ARCH_CPU_X86_FAMILY
@@ -143,11 +211,12 @@ union ThreadContext {
   using NativeThreadContext = user_regs;
 #elif defined(ARCH_CPU_MIPS_FAMILY)
 // No appropriate NativeThreadsContext type available for MIPS
+#elif defined(ARCH_CPU_RISCV_FAMILY)
 #else
 #error Port.
 #endif  // ARCH_CPU_X86_FAMILY || ARCH_CPU_ARM64
 
-#if !defined(ARCH_CPU_MIPS_FAMILY)
+#if !defined(ARCH_CPU_MIPS_FAMILY) && !defined(ARCH_CPU_RISCV_FAMILY)
 #if defined(ARCH_CPU_32_BITS)
   static_assert(sizeof(t32_t) == sizeof(NativeThreadContext), "Size mismatch");
 #else  // ARCH_CPU_64_BITS
@@ -218,6 +287,9 @@ union FloatContext {
     } fpregs[32];
     uint32_t fpcsr;
     uint32_t fpu_id;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+    uint64_t f[32];
+    uint32_t fcsr;
 #else
 #error Port.
 #endif  // ARCH_CPU_X86_FAMILY
@@ -252,6 +324,9 @@ union FloatContext {
     double fpregs[32];
     uint32_t fpcsr;
     uint32_t fpu_id;
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+    uint64_t f[32];
+    uint32_t fcsr;
 #else
 #error Port.
 #endif  // ARCH_CPU_X86_FAMILY
@@ -281,6 +356,7 @@ union FloatContext {
   static_assert(sizeof(f64) == sizeof(user_fpsimd_struct), "Size mismatch");
 #elif defined(ARCH_CPU_MIPS_FAMILY)
 // No appropriate floating point context native type for available MIPS.
+#elif defined(ARCH_CPU_RISCV_FAMILY)
 #else
 #error Port.
 #endif  // ARCH_CPU_X86

@@ -352,6 +352,20 @@ struct CPUContextMIPS64 {
   uint64_t fir;
 };
 
+//! \brief A context structure carrying RISC CPU state.
+struct CPUContextRISCV {
+  uint32_t regs[32];
+  uint64_t fpregs[32];
+  uint32_t fcsr;
+};
+
+//! \brief A context structure carrying RISC64 CPU state.
+struct CPUContextRISCV64 {
+  uint64_t regs[32];
+  uint64_t fpregs[32];
+  uint32_t fcsr;
+};
+
 //! \brief A context structure capable of carrying the context of any supported
 //!     CPU architecture.
 struct CPUContext {
@@ -382,6 +396,8 @@ struct CPUContext {
     CPUContextARM64* arm64;
     CPUContextMIPS* mipsel;
     CPUContextMIPS64* mips64;
+    CPUContextRISCV* riscv;
+    CPUContextRISCV64* riscv64;
   };
 };
 

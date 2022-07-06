@@ -421,6 +421,66 @@ static_assert(offsetof(UContext<ContextTraits64>, mcontext.fpregs) ==
                   offsetof(ucontext_t, uc_mcontext.fpregs),
               "context offset mismatch");
 #endif
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+
+struct MContext32 {
+  uint32_t gregs[32];
+  uint64_t fpregs[32];
+  unsigned int fcsr;
+};
+
+struct MContext64 {
+  uint64_t gregs[32];
+  uint64_t fpregs[32];
+  unsigned int fcsr;
+};
+
+struct ContextTraits32 : public Traits32 {
+  using MContext = MContext32;
+  using SignalThreadContext = ThreadContext::t32_t;
+  using SignalFloatContext = FloatContext::f32_t;
+  using CPUContext = CPUContextRISCV;
+};
+
+struct ContextTraits64 : public Traits64 {
+  using MContext = MContext64;
+  using SignalThreadContext = ThreadContext::t64_t;
+  using SignalFloatContext = FloatContext::f64_t;
+  using CPUContext = CPUContextRISCV64;
+};
+
+template <typename Traits>
+struct UContext {
+  typename Traits::ULong flags;
+  typename Traits::Address link;
+  SignalStack<Traits> stack;
+  Sigset<Traits> sigmask;
+  char padding[128 - sizeof(sigmask)];
+  typename Traits::Char_64Only padding2[8];
+  typename Traits::MContext mcontext;
+};
+
+#if defined(ARCH_CPU_RISCV)
+static_assert(offsetof(UContext<ContextTraits32>, mcontext) ==
+                  offsetof(ucontext_t, uc_mcontext),
+              "context offset mismatch");
+static_assert(offsetof(UContext<ContextTraits32>, mcontext.gregs) ==
+                  offsetof(ucontext_t, uc_mcontext.__gregs),
+              "context offset mismatch");
+static_assert(offsetof(UContext<ContextTraits32>, mcontext.fpregs) ==
+                  offsetof(ucontext_t, uc_mcontext.__fpregs),
+              "context offset mismatch");
+#elif defined(ARCH_CPU_RISCV64)
+static_assert(offsetof(UContext<ContextTraits64>, mcontext) ==
+                  offsetof(ucontext_t, uc_mcontext),
+              "context offset mismatch");
+static_assert(offsetof(UContext<ContextTraits64>, mcontext.gregs) ==
+                  offsetof(ucontext_t, uc_mcontext.__gregs),
+              "context offset mismatch");
+static_assert(offsetof(UContext<ContextTraits64>, mcontext.fpregs) ==
+                  offsetof(ucontext_t, uc_mcontext.__fpregs),
+              "context offset mismatch");
+#endif
 
 #else
 #error Port.

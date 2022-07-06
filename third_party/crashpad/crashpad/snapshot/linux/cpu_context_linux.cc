@@ -266,6 +266,30 @@ void InitializeCPUContextARM64_OnlyFPSIMD(
   context->fpcr = float_context.fpcr;
 }
 
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+
+template <typename Traits>
+void InitializeCPUContextRISCV(
+    const typename Traits::SignalThreadContext& thread_context,
+    const typename Traits::SignalFloatContext& float_context,
+    typename Traits::CPUContext* context) {
+  static_assert(sizeof(context->regs) == sizeof(thread_context),
+                "registers size mismatch");
+  static_assert(sizeof(context->fpregs) == sizeof(float_context.f),
+                "fp registers size mismatch");
+  memcpy(&context->regs, &thread_context, sizeof(context->regs));
+  memcpy(&context->fpregs, &float_context, sizeof(context->fpregs));
+  context->fcsr = float_context.fcsr;
+}
+template void InitializeCPUContextRISCV<ContextTraits32>(
+    const ContextTraits32::SignalThreadContext& thread_context,
+    const ContextTraits32::SignalFloatContext& float_context,
+    ContextTraits32::CPUContext* context);
+template void InitializeCPUContextRISCV<ContextTraits64>(
+    const ContextTraits64::SignalThreadContext& thread_context,
+    const ContextTraits64::SignalFloatContext& float_context,
+    ContextTraits64::CPUContext* context);
+
 #endif  // ARCH_CPU_X86_FAMILY
 
 }  // namespace internal

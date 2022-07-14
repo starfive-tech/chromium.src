@@ -61,6 +61,7 @@ def SetConfigPath(options):
 
   libdir = sysroot + '/usr/' + options.system_libdir + '/pkgconfig'
   libdir += ':' + sysroot + '/usr/share/pkgconfig'
+  libdir += ':' + sysroot + '/usr/' + options.system_libdir + '/riscv64-linux-gnu/pkgconfig'
   os.environ['PKG_CONFIG_LIBDIR'] = libdir
   return libdir
 

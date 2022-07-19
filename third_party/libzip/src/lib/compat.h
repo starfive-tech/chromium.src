@@ -184,12 +184,4 @@ typedef char bool;
 #endif
 #endif
 
-#ifndef S_ISDIR
-#define S_ISDIR(mode) (((mode)&S_IFMT) == S_IFDIR)
-#endif
-
-#ifndef S_ISREG
-#define S_ISREG(mode) (((mode)&S_IFMT) == S_IFREG)
-#endif
-
 #endif /* compat.h */

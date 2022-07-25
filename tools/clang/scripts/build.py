@@ -650,6 +650,8 @@ def main():
       '-DENABLE_X86_RELAX_RELOCATIONS=NO',
       # See crbug.com/1126219: Use native symbolizer instead of DIA
       '-DLLVM_ENABLE_DIA_SDK=OFF',
+      # StarFive: Required for native RISCV build
+      '-DSANITIZER_COMMON_LINK_LIBS=-latomic',
       # See crbug.com/1205046: don't build scudo (and others we don't need).
       '-DCOMPILER_RT_SANITIZERS_TO_BUILD=asan;dfsan;msan;hwasan;tsan;cfi',
       # The default value differs per platform, force it off everywhere.

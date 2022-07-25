@@ -1511,6 +1511,8 @@ config("default_warnings") {
       # this as well. http://crbug.com/316352
       "-Wno-unneeded-internal-declaration",
       "-Wno-unused-function",
+      "-Wno-invalid-offsetof",
+      "-Wno-range-loop-construct",
     ]
 
     if (!is_nacl || is_nacl_saigo) {
@@ -1938,8 +1940,17 @@ config("no_incompatible_pointer_warnings") {
 # Shared settings for both "optimize" and "optimize_max" configs.
 # IMPORTANT: On Windows "/O1" and "/O2" must go before the common flags.
 if (is_win) {
-  common_optimize_on_cflags = [
-    "/Ob2",  # Both explicit and auto inlining.
+  common_optimize_on_cflags = []
+  if(is_clang) {
+    common_optimize_on_cflags += [
+      "/Ob2",  # Both explicit and auto inlining.
+    ]
+  } else {
+    common_optimize_on_cflags += [
+      "/Ob3",  # Both explicit and auto inlining.
+    ]
+  }
+  common_optimize_on_cflags += [
     "/Oy-",  # Disable omitting frame pointers, must be after /O2.
     "/Zc:inline",  # Remove unreferenced COMDAT (faster links).
   ]

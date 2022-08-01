@@ -40,6 +40,8 @@ config("tflite_support_flags") {
     "-Wno-ignored-attributes",
     "-Wno-deprecated-declarations",
     "-Wno-unused-variable",
+    "-Wno-defaulted-function-deleted",
+    "-Wno-absolute-value",
   ]
   if (!is_win) {
     cflags_cc = [ "-frtti" ]

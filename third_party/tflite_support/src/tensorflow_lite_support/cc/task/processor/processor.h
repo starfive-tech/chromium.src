@@ -34,7 +34,7 @@ namespace processor {
 // Shares the common logics to handle tflite_engine and metadata.
 class Processor {
  public:
-  Processor() = default;
+  // Processor() = default;
   virtual ~Processor() = default;
 
   // Processor is neither copyable nor movable.

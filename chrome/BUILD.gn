@@ -1466,6 +1466,7 @@ group("dependencies") {
     "//services/tracing/public/cpp",
     "//third_party/blink/public:blink_devtools_frontend_resources",
     "//third_party/blink/public:blink_devtools_inspector_resources",
+    "//third_party/libvpx",
     "//v8:v8_headers",
   ]
 

@@ -35,6 +35,8 @@ if (current_cpu == "x86") {
   } else {
     cpu_arch_full = current_cpu
   }
+} else if (current_cpu == "riscv64") {
+  cpu_arch_full = "generic"
 } else {
   cpu_arch_full = current_cpu
 }
@@ -399,6 +401,9 @@ static_library("libvpx") {
       sources = libvpx_srcs_arm64
       public_deps = [ ":libvpx_arm64_headers" ]
     }
+  } else if (current_cpu == "riscv64") {
+    sources = libvpx_srcs_generic
+    public_deps = [ ":libvpx_generic_headers" ]
   }
 
   configs -= [ "//build/config/compiler:chromium_code" ]

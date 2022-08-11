@@ -11,6 +11,9 @@ import("//build/buildflag_header.gni")
 import("//components/optimization_guide/features.gni")
 import("//third_party/tflite/features.gni")
 
+cflags_cc = [ "-Wno-absolute-value" ]
+cflags_cc += [ "-Wno-defaulted-function-deleted" ]
+
 static_library("bloomfilter") {
   sources = [
     "bloom_filter.cc",

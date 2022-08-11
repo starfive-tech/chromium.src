@@ -168,6 +168,7 @@ clang_v8_toolchain("clang_x64_v8_riscv64") {
   toolchain_args = {
     current_cpu = "x64"
     v8_current_cpu = "riscv64"
+    use_lld = false
   }
 }
 

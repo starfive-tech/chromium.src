@@ -1170,6 +1170,7 @@ config("compiler_cpu_abi") {
       }
     } else if (current_cpu == "riscv64") {
       cflags += [
+        "-march=rv64gc",
         "-m64",
         "--target=riscv64-linux-gnu",
         "-mno-relax",

@@ -1180,6 +1180,7 @@ config("compiler_cpu_abi") {
       ldflags += [
         "--target=riscv64-linux-gnu",
         "-mno-relax",
+        "-Wl,-rpath-link=./lib",
       ]
     } else if (current_cpu == "s390x") {
       cflags += [ "-m64" ]

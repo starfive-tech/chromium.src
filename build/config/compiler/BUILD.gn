@@ -1159,6 +1159,7 @@ config("compiler_cpu_abi") {
       if (is_clang) {
         cflags += [
           "--target=riscv64-linux-gnu",
+          "-march=rv64gc",
           "-mno-relax",
         ]
         ldflags += [

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<title>Sub Apps: Valid calls for add()</title>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="resources/subapps-helpers.js"></script>
+<script>
+
+subapps_test(async (t, mockSubAppsService) => {
+  const same_origin_url = document.location.origin + '/sub-app';
+
+  let subapp = {};
+  let install_options = {};
+  install_options["install_url"] = same_origin_url;
+  subapp[same_origin_url] = install_options;
+
+  await navigator.subApps.add(subapp);
+}, 'Add API call works with single sub app.');
+
+subapps_test(async (t, mockSubAppsService) => {
+  let subapps = {};
+
+  const url_1 = document.location.origin + '/sub-app-1';
+  let install_options_1 = {};
+  install_options_1["install_url"] = url_1;
+  subapps[url_1] = install_options_1;
+
+  const url_2 = document.location.origin + '/sub-app-2';
+  let install_options_2 = {};
+  install_options_2["install_url"] = url_2;
+  subapps[url_2] = install_options_2;
+
+  await navigator.subApps.add(subapps);
+}, 'Add API call works with multiple sub apps.');
+
+
+</script>

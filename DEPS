@@ -248,6 +248,7 @@ vars = {
   'nwjs_git': 'https://github.com/nwjs',
   'pdfium_git': 'https://pdfium.googlesource.com',
   'quiche_git': 'https://quiche.googlesource.com',
+  'reb_git' : 'https://github.com/rebeccasf',
   'skia_git': 'https://skia.googlesource.com',
   'swiftshader_git': 'https://swiftshader.googlesource.com',
   'webrtc_git': 'https://webrtc.googlesource.com',
@@ -262,7 +263,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ANGLE
   # and whatever else without interference from each other.
-  'angle_revision': '9768648fffc94a434a7d400a2542ce3706224417',
+  'angle_revision': '6fb80b7687be3e496cadd2ac1dddad2261c95038',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling SwiftShader
   # and whatever else without interference from each other.
@@ -1004,7 +1005,7 @@ deps = {
   },
 
   'src/third_party/angle':
-    Var('chromium_git') + '/angle/angle.git' + '@' +  Var('angle_revision'),
+    Var('reb_git') + '/angle.git' + '@' +  Var('angle_revision'),
 
   'src/third_party/dav1d/libdav1d':
     Var('chromium_git') + '/external/github.com/videolan/dav1d.git' + '@' + '87f9a81cd770e49394a45deca7a3df41243de00b',

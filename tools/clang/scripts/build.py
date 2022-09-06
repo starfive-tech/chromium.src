@@ -987,6 +987,9 @@ def main():
     if platform.machine() == 'aarch64':
       cmake_args.append(
           '-DLLVM_DEFAULT_TARGET_TRIPLE=aarch64-unknown-linux-gnu')
+    elif platform.machine() == 'riscv64':
+      cmake_args.append(
+          '-DLLVM_DEFAULT_TARGET_TRIPLE=riscv64-unknown-linux-gnu')
     else:
       cmake_args.append('-DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-unknown-linux-gnu')
     cmake_args.append('-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON')

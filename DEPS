@@ -271,7 +271,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling PDFium
   # and whatever else without interference from each other.
-  'pdfium_revision': '62ad9af8a9f9494645b659674b64bb51775cde05',
+  'pdfium_revision': '5e6f6020bcf170fbdd68588a31176bde205be12a',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling BoringSSL
   # and whatever else without interference from each other.
@@ -1500,7 +1500,7 @@ deps = {
   },
 
   'src/third_party/pdfium':
-    Var('pdfium_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
+    Var('reb_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
 
   # Parses Windows PE/COFF executable format.
   'src/third_party/pefile': {

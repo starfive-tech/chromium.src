@@ -620,7 +620,7 @@ def main():
   cxxflags = []
   ldflags = []
 
-  targets = 'AArch64;ARM;Mips;PowerPC;SystemZ;WebAssembly;X86'
+  targets = 'AArch64;ARM;Mips;PowerPC;RISCV;SystemZ;WebAssembly;X86'
 
   projects = 'clang;compiler-rt;lld;clang-tools-extra'
 

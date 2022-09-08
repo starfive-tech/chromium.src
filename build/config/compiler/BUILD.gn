@@ -1521,7 +1521,8 @@ config("default_warnings") {
       "-Wno-unused-parameter",  # Unused function parameters.
       "-Wno-unused-private-field",
       "-Wno-unused-const-variable",
-      "-Wno-unreachable-code",
+      # "-Wno-unreachable-code",
+      "-Wno-unreachable-code-break",
     ]
   }
 

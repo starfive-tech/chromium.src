@@ -293,11 +293,12 @@ vars = {
   'quiche_git': 'https://quiche.googlesource.com',
   'skia_git': 'https://skia.googlesource.com',
   'swiftshader_git': 'https://swiftshader.googlesource.com',
+  'starfive_git': 'https://github.com/rebeccasf',
   'webrtc_git': 'https://webrtc.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Skia
   # and whatever else without interference from each other.
-  'skia_revision': '192120757a64a52b2ef103105fd5e7a1b374b7ca',
+  'skia_revision': '013ddaa2c216c840751872b93b1f684ce87626a8',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling V8
   # and whatever else without interference from each other.
@@ -305,7 +306,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ANGLE
   # and whatever else without interference from each other.
-  'angle_revision': '428b6788d71120c833f029aa4e24903fa811f77b',
+  'angle_revision': '9cc95ba6aacc188d319dd21555d7b03690adfeb0',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling SwiftShader
   # and whatever else without interference from each other.
@@ -313,7 +314,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling PDFium
   # and whatever else without interference from each other.
-  'pdfium_revision': '213704d5b7415001c8851d7dc0dbb33c7a89a4d4',
+  'pdfium_revision': '26d0e3bb40865f4146a21e61586ac2668ab39ee5',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling BoringSSL
   # and whatever else without interference from each other.
@@ -472,11 +473,11 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling feed
   # and whatever else without interference from each other.
-  'highway_revision': '424360251cdcfc314cfc528f53c872ecd63af0f0',
+  'highway_revision': '6667b0cd38025d0a0457537e9badcbc6be6e2049',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ffmpeg
   # and whatever else without interference from each other.
-  'ffmpeg_revision': 'b71ecd02b47939e530e620d9d0d101463db0f688',
+  'ffmpeg_revision': 'b2947b3c1a8d19a857e4d6b44cda547535ee8228',
 
   # If you change this, also update the libc++ revision in
   # //buildtools/deps_revisions.gni.
@@ -1066,7 +1067,7 @@ deps = {
   },
 
   'src/third_party/angle':
-    Var('chromium_git') + '/angle/angle.git' + '@' +  Var('angle_revision'),
+    Var('starfive_git') + '/angle.git' + '@' +  Var('angle_revision'),
 
   'src/third_party/content_analysis_sdk/src':
     Var('chromium_git') + '/external/github.com/chromium/content_analysis_sdk.git' + '@' + 'fe3c222acb75bdd5248a3339d4255f032e293296',
@@ -1081,7 +1082,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/libjxl/libjxl.git' + '@' + Var('libjxl_revision'),
 
   'src/third_party/highway/src':
-    Var('chromium_git') + '/external/github.com/google/highway.git' + '@' + Var('highway_revision'),
+    Var('starfive_git') + '/highway.git' + '@' + Var('highway_revision'),
 
   'src/third_party/apache-portable-runtime/src': {
       'url': Var('chromium_git') + '/external/apache-portable-runtime.git' + '@' + 'c3f11fcd86b42922834cae91103cf068246c6bb6',
@@ -1102,7 +1103,7 @@ deps = {
     Var('boringssl_git') + '/boringssl.git' + '@' +  Var('boringssl_revision'),
 
   'src/third_party/breakpad/breakpad':
-    Var('chromium_git') + '/breakpad/breakpad.git' + '@' + 'e085b3b50bde862d0cf3ce4594e3f391bcf5faec',
+    Var('starfive_git') + '/breakpad.git' + '@' + 'bd94fa6020d0362d7c0075a82e33cd35ef1b72f1',
 
   'src/third_party/byte_buddy': {
       'packages': [
@@ -1215,7 +1216,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/google/farmhash.git' + '@' + '816a4ae622e964763ca0862d9dbd19324a1eaf45',
 
   'src/third_party/ffmpeg':
-    Var('chromium_git') + '/chromium/third_party/ffmpeg.git' + '@' + Var('ffmpeg_revision'),
+    Var('starfive_git') + '/ffmpeg.git' + '@' + Var('ffmpeg_revision'),
 
   'src/third_party/flac':
     Var('chromium_git') + '/chromium/deps/flac.git' + '@' + 'af862024c8c8fa0ae07ced05e89013d881b00596',
@@ -1564,7 +1565,7 @@ deps = {
   },
 
   'src/third_party/pdfium':
-    Var('pdfium_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
+    Var('starfive_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
 
   # Parses Windows PE/COFF executable format.
   'src/third_party/pefile': {
@@ -1573,7 +1574,7 @@ deps = {
   },
 
   'src/third_party/perfetto':
-    Var('android_git') + '/platform/external/perfetto.git' + '@' + 'c16f31c6da7523528ae09808c3427fb395142c94',
+    Var('starfive_git') + '/perfetto.git' + '@' + 'c415f1bd1fe4b65ceabf354972b08fc874fdd070',
 
   'src/third_party/perl': {
       'url': Var('chromium_git') + '/chromium/deps/perl.git' + '@' + '6f3e5028eb65d0b4c5fdd792106ac4c84eee1eb3',
@@ -1640,7 +1641,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/google/ruy.git' + '@' + '841ea4172ba904fe3536789497f9565f2ef64129',
 
   'src/third_party/skia':
-    Var('skia_git') + '/skia.git' + '@' +  Var('skia_revision'),
+    Var('starfive_git') + '/skia.git' + '@' +  Var('skia_revision'),
 
   'src/third_party/smhasher/src':
     Var('chromium_git') + '/external/smhasher.git' + '@' + 'e87738e57558e0ec472b2fc3a643b838e5b6e88f',
@@ -1700,7 +1701,7 @@ deps = {
 
   # Display server protocol for Linux.
   'src/third_party/wayland/src': {
-      'url': Var('chromium_git') + '/external/anongit.freedesktop.org/git/wayland/wayland.git' + '@' + 'e60398b1755bfcdf09f040d3769131fe0d9762fc',
+      'url': Var('starfive_git') + '/wayland.git' + '@' + '8f0dd7ae92c4ed6902d14fae945de5137eabdab2',
       'condition': 'checkout_linux',
   },
 
@@ -1732,7 +1733,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/gpuweb/cts.git' + '@' + '4e8df07a22cac3a9a4b606c7458ecb4646fabf73',
 
   'src/third_party/webrtc':
-    Var('webrtc_git') + '/src.git' + '@' + '7aaeb5a270ba23f5844f7301a50aaff9b6ca6126',
+    Var('starfive_git') + '/webrtc.git' + '@' + '6526ce02f9df2030d57703b966aa3e2249d90477',
 
   'src/third_party/libgifcodec':
      Var('skia_git') + '/libgifcodec' + '@'+  Var('libgifcodec_revision'),

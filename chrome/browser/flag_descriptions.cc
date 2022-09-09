@@ -4455,13 +4455,17 @@ const char kBiometricAuthenticationForFillingDescription[] =
 
 // ChromeOS -------------------------------------------------------------------
 
-#if BUILDFLAG(IS_CHROMEOS_ASH)
+#if BUILDFLAG(IS_CHROMEOS_ASH) || BUILDFLAG(IS_LINUX)
 
 const char kAcceleratedMjpegDecodeName[] =
     "Hardware-accelerated mjpeg decode for captured frame";
 const char kAcceleratedMjpegDecodeDescription[] =
     "Enable hardware-accelerated mjpeg decode for captured frame where "
     "available.";
+
+#endif
+
+#if BUILDFLAG(IS_CHROMEOS_ASH)
 
 const char kAdaptiveChargingForTestingName[] =
     "Show adaptive charging notifications for testing";

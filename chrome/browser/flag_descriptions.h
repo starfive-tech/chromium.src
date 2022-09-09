@@ -2553,10 +2553,14 @@ extern const char kBiometricAuthenticationForFillingDescription[];
 
 // ChromeOS -------------------------------------------------------------------
 
-#if BUILDFLAG(IS_CHROMEOS_ASH)
+#if BUILDFLAG(IS_CHROMEOS_ASH) || BUILDFLAG(IS_LINUX)
 
 extern const char kAcceleratedMjpegDecodeName[];
 extern const char kAcceleratedMjpegDecodeDescription[];
+
+#endif // BUILDFLAG(IS_CHROMEOS_ASH) || BUILDFLAG(IS_LINUX)
+
+#if BUILDFLAG(IS_CHROMEOS_ASH)
 
 extern const char kAdaptiveChargingName[];
 extern const char kAdaptiveChargingDescription[];

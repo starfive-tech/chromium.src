@@ -651,6 +651,7 @@ if (is_linux || is_chromeos || is_android) {
       "breakpad/src/common/simple_string_dictionary.h",
       "breakpad/src/common/string_conversion.cc",
       "breakpad/src/common/string_conversion.h",
+      "breakpad/src/google_breakpad/common/minidump_format.h",
     ]
 
     configs -= [ "//build/config/compiler:chromium_code" ]

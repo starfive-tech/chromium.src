@@ -1,0 +1,107 @@
+# Copyright (c) 2012 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+[GENERAL]
+#
+# Chrome Application dir entries, sorted alphabetically.
+#
+nw.exe: %(ChromeDir)s\
+nw_proxy.exe: %(ChromeDir)s\
+#
+# Chrome version dir assembly manifest.
+# The name of this file must match the name of the version dir, so we cannot
+# hard-code it.
+# // TODO(caitkp): Find a way to do this without wildcards.
+#
+*.*.*.*.manifest: %(ChromeDir)s\
+#
+# Chrome version dir entries, sorted alphabetically.
+#
+nw.dll: %(ChromeDir)s\
+nw_100_percent.pak: %(ChromeDir)s\
+nw_child.dll: %(ChromeDir)s\
+nw_elf.dll: %(ChromeDir)s\
+chrome_pwa_launcher.exe: %(ChromeDir)s\
+d3dcompiler_47.dll: %(ChromeDir)s\
+eventlog_provider.dll: %(ChromeDir)s\
+icudtl.dat: %(ChromeDir)s\
+libEGL.dll: %(ChromeDir)s\
+libGLESv2.dll: %(ChromeDir)s\
+mojo_core.dll: %(ChromeDir)s\
+nacl64.exe: %(ChromeDir)s\
+nacl_irt_x86_32.nexe: %(ChromeDir)s\
+nacl_irt_x86_64.nexe: %(ChromeDir)s\
+notification_helper.exe: %(ChromeDir)s\
+resources.pak: %(ChromeDir)s\
+node.dll: %(ChromeDir)s\
+vk_swiftshader.dll: %(ChromeDir)s\
+vk_swiftshader_icd.json: %(ChromeDir)s\
+vulkan-1.dll: %(ChromeDir)s\
+v8_context_snapshot.bin: %(ChromeDir)s\
+
+#
+# Sub directories living in the version dir
+#
+Extensions\*.*: %(ChromeDir)s\Extensions\
+locales\*.pak: %(ChromeDir)s\Locales
+
+#
+# VisualElements sub-dir.
+#
+# All or none of the *Logo*.png files need to be present as the creation of
+# VisualElementsManifest.xml is based on the existence of
+# %(VersionDir)\VisualElements.
+
+Logo.png: %(ChromeDir)s\VisualElements\
+SmallLogo.png: %(ChromeDir)s\VisualElements\
+
+#
+# MEI Preload sub dir
+#
+MEIPreload\manifest.json: %(VersionDir)s\MEIPreload\
+MEIPreload\preloaded_data.pb: %(VersionDir)s\MEIPreload\
+
+[HIDPI]
+nw_200_percent.pak: %(ChromeDir)s\
+
+[FFMPEG]
+ffmpeg.dll: %(VersionDir)s\
+
+[TOUCH]
+
+[GOOGLE_CHROME]
+# The elevation service is only installed for Google Chrome builds.
+elevation_service.exe: %(VersionDir)s\
+
+#
+# Sub directories living in the version dir
+#
+default_apps\*.crx: %(VersionDir)s\default_apps\
+default_apps\external_extensions.json: %(VersionDir)s\default_apps\
+
+#
+# VisualElements sub-dir.
+#
+LogoBeta.png: %(VersionDir)s\VisualElements\
+LogoCanary.png: %(VersionDir)s\VisualElements\
+LogoDev.png: %(VersionDir)s\VisualElements\
+SmallLogoBeta.png: %(VersionDir)s\VisualElements\
+SmallLogoCanary.png: %(VersionDir)s\VisualElements\
+SmallLogoDev.png: %(VersionDir)s\VisualElements\
+
+#
+# Widevine CDM sub-dir
+#
+WidevineCdm\manifest.json: %(ChromeDir)s\WidevineCdm\
+WidevineCdm\LICENSE: %(ChromeDir)s\WidevineCdm\
+WidevineCdm\_platform_specific\win_x86\widevinecdm.dll: %(ChromeDir)s\WidevineCdm\_platform_specific\win_x86\
+WidevineCdm\_platform_specific\win_x86\widevinecdm.dll.sig: %(ChromeDir)s\WidevineCdm\_platform_specific\win_x86\
+WidevineCdm\_platform_specific\win_x64\widevinecdm.dll: %(ChromeDir)s\WidevineCdm\_platform_specific\win_x64\
+WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig: %(ChromeDir)s\WidevineCdm\_platform_specific\win_x64\
+
+[SNAPSHOTBLOB]
+# The snapshot_blob.bin V8 snapshot is needed in builds that don't use
+# v8_context_snapshot.bin, such as Linux-Windows cross-builds.
+# It has its own section here so that it's only included when necessary.
+snapshot_blob.bin: %(ChromeDir)s\

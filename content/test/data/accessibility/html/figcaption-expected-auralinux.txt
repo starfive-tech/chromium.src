@@ -1,0 +1,5 @@
+[document web]
+++[panel] details
+++++[image] name='This is a green box.'
+++++[caption] details-for
+++++++[static] name='Fig.1 - A green Box'

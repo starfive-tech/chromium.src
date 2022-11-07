@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+  <title>WebRTC Automated Test</title>
+  <script type="text/javascript" src="test_functions.js"></script>
+  <script>
+  'use strict';
+  var settings;
+  var video_track;
+  var audio_track;
+  var stored_media_stream;
+
+  function handleSuccess(stream) {
+    settings = stream.getVideoTracks()[0].getSettings();
+    var video = document.querySelector('video');
+    video.srcObject = stream;
+    video_track = stream.getVideoTracks()[0];
+    if (stream.getAudioTracks().length > 0) {
+      audio_track = stream.getAudioTracks()[0];
+    }
+    video.play();
+    returnToTest("capture-success");
+  }
+
+  function compareErrors(expectedError) {
+    return function(error) {
+      console.log('getUserMedia error: ' + error.name, error);
+      returnToTest(error.toString() == expectedError ? "expected-error"
+                                                     : "unexpected-error");
+    }
+  }
+
+  function handleError(error) {
+    console.log('getUserMedia error: ' + error.name, error);
+    returnToTest("capture-failure");
+  }
+
+  function runGetDisplayMedia(constraints, frame, expectedError) {
+    if (frame == "allowedFrame" || frame == "disallowedFrame") {
+      document.getElementById(frame).contentWindow.postMessage(constraints);
+      // window.domAutomationController.send() called by embedded page.
+      return;
+    }
+
+    navigator.mediaDevices.getDisplayMedia(constraints).
+      then(handleSuccess).catch(expectedError ? compareErrors(expectedError)
+                                              : handleError);
+  }
+
+  function hasAudioTrack() {
+    returnToTest(`${!!audio_track}`);
+  }
+
+  function getVideoTrackType() {
+    if (!video_track) {
+      returnToTest("error-no-video-track");
+    }
+    returnToTest(video_track.constructor.name);
+  }
+
+  function getVideoCloneTrackType() {
+    if (!video_track) {
+      returnToTest("error-no-video-track-to-clone");
+    }
+    returnToTest(video_track.clone().constructor.name);
+  }
+
+  function getAudioTrackType() {
+    if (!audio_track) {
+      returnToTest("error-no-audio-track");
+    }
+    returnToTest(audio_track.constructor.name);
+  }
+
+  function getDisplaySurfaceSetting() {
+    returnToTest(settings.displaySurface);
+  }
+
+  function getLogicalSurfaceSetting() {
+    returnToTest(settings.logicalSurface ? "true" : "false");
+  }
+
+  function getCursorSetting() {
+    returnToTest(settings.cursor);
+  }
+
+  function getWidthSetting() {
+    returnToTest(settings.width.toString());
+  }
+
+  function getFrameRateSetting() {
+    returnToTest(settings.frameRate.toString());
+  }
+
+  function waitVideoMuted() {
+    if (video_track.muted) {
+      returnToTest("muted");
+    }
+    video_track.onmute = function(evt) {
+      returnToTest("muted");
+    }
+  }
+
+  function waitVideoUnmuted() {
+    if (!video_track.muted) {
+      returnToTest("unmuted");
+    }
+    video_track.onunmute = function(evt) {
+      returnToTest("unmuted");
+    }
+  }
+
+  function waitVideoEnded() {
+    if (video_track.readyState == "ended") {
+      returnToTest("ended");
+    }
+    video_track.onended = function(evt) {
+      returnToTest("ended");
+    }
+  }
+  </script>
+</head>
+<body>
+  <table border="0">
+    <tr>
+      <td>getdisplayMedia() output</td>
+    </tr>
+    <tr>
+      <td>
+        <video id="local-view" autoplay></video>
+      </td>
+    </tr>
+  </table>
+  <br/>
+    <iframe id="allowedFrame" src="webrtc_getdisplaymedia_embedded_document.html"></iframe>
+    <iframe id="disallowedFrame" src="webrtc_getdisplaymedia_embedded_document.html" allow="display-capture 'none'"></iframe>
+</body>
+</html>

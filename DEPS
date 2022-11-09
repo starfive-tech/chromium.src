@@ -302,19 +302,20 @@ vars = {
   'quiche_git': 'https://quiche.googlesource.com',
   'skia_git': 'https://skia.googlesource.com',
   'swiftshader_git': 'https://swiftshader.googlesource.com',
+  'starfive_git': 'https://github.com/rebeccasf',
   'webrtc_git': 'https://webrtc.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Skia
   # and whatever else without interference from each other.
-  'skia_revision': '3a8c9bc2f275732b2fd1a566becf421e62fe1f46',
+  'skia_revision': '078cc8767a977e464cd56e20108fcd77a65d1b80',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling V8
   # and whatever else without interference from each other.
-  'v8_revision': '5a8a4a69ac843a0724f94cc2244b66b51f0f6806',
+  'v8_revision': 'f2bb918dafe78073d506243860d33ff828ffa999',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ANGLE
   # and whatever else without interference from each other.
-  'angle_revision': 'bbf57e6db2fab3ee4c4336d6c73786b73aff28b2',
+  'angle_revision': '352123cda1050d5d0e8568089176388bd7719ae2',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling SwiftShader
   # and whatever else without interference from each other.
@@ -322,7 +323,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling PDFium
   # and whatever else without interference from each other.
-  'pdfium_revision': '6d0a3d5365d04967d67399617acc16bc7e7efe52',
+  'pdfium_revision': 'b7a0fec99dd7b36d1f0dc133b57d2074ebba2082',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling BoringSSL
   # and whatever else without interference from each other.
@@ -485,7 +486,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ffmpeg
   # and whatever else without interference from each other.
-  'ffmpeg_revision': '3dd1a90db3f7ec955ff5476bd4ee5942f093c6fe',
+  'ffmpeg_revision': '59a53ebe39168382cb35f6b9040edc2bd19549a1',
 
   # If you change this, also update the libc++ revision in
   # //buildtools/deps_revisions.gni.
@@ -1089,7 +1090,7 @@ deps = {
   },
 
   'src/third_party/angle':
-    Var('chromium_git') + '/angle/angle.git' + '@' +  Var('angle_revision'),
+    Var('starfive_git') + '/angle.git' + '@' +  Var('angle_revision'),
 
   'src/third_party/content_analysis_sdk/src':
     Var('chromium_git') + '/external/github.com/chromium/content_analysis_sdk.git' + '@' + 'c2d02ffaef3e21df65640bb84cde6ac90d45303e',
@@ -1125,7 +1126,7 @@ deps = {
     Var('boringssl_git') + '/boringssl.git' + '@' +  Var('boringssl_revision'),
 
   'src/third_party/breakpad/breakpad':
-    Var('chromium_git') + '/breakpad/breakpad.git' + '@' + 'e085b3b50bde862d0cf3ce4594e3f391bcf5faec',
+    Var('starfive_git') + '/breakpad.git' + '@' + '240cb794c192a53d95c0ecd510d759def7ab2e1b',
 
   'src/third_party/byte_buddy': {
       'packages': [
@@ -1243,7 +1244,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/google/farmhash.git' + '@' + '816a4ae622e964763ca0862d9dbd19324a1eaf45',
 
   'src/third_party/ffmpeg':
-    Var('chromium_git') + '/chromium/third_party/ffmpeg.git' + '@' + Var('ffmpeg_revision'),
+    Var('starfive_git') + '/ffmpeg.git' + '@' + Var('ffmpeg_revision'),
 
   'src/third_party/flac':
     Var('chromium_git') + '/chromium/deps/flac.git' + '@' + 'af862024c8c8fa0ae07ced05e89013d881b00596',
@@ -1603,7 +1604,7 @@ deps = {
   },
 
   'src/third_party/pdfium':
-    Var('pdfium_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
+    Var('starfive_git') + '/pdfium.git' + '@' +  Var('pdfium_revision'),
 
   # Parses Windows PE/COFF executable format.
   'src/third_party/pefile': {
@@ -1612,7 +1613,7 @@ deps = {
   },
 
   'src/third_party/perfetto':
-    Var('android_git') + '/platform/external/perfetto.git' + '@' + 'eee5bf9ccb87c0f8cf874974e9c8708491f038df',
+    Var('starfive_git') + '/perfetto.git' + '@' + 'cae89f6df8c0b1067d485c2d88b4ca39a53c43f1',
 
   'src/third_party/perl': {
       'url': Var('chromium_git') + '/chromium/deps/perl.git' + '@' + '6f3e5028eb65d0b4c5fdd792106ac4c84eee1eb3',
@@ -1693,7 +1694,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/google/ruy.git' + '@' + '841ea4172ba904fe3536789497f9565f2ef64129',
 
   'src/third_party/skia':
-    Var('skia_git') + '/skia.git' + '@' +  Var('skia_revision'),
+    Var('starfive_git') + '/skia.git' + '@' +  Var('skia_revision'),
 
   'src/third_party/smhasher/src':
     Var('chromium_git') + '/external/smhasher.git' + '@' + 'e87738e57558e0ec472b2fc3a643b838e5b6e88f',
@@ -1796,7 +1797,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/gpuweb/cts.git' + '@' + 'dec4d77ee3e525c74ae69f77acf3c9c67dd7e7ce',
 
   'src/third_party/webrtc':
-    Var('webrtc_git') + '/src.git' + '@' + 'eef098d1c7d50613d8bff2467d674525a9d0c57c',
+    Var('starfive_git') + '/webrtc.git' + '@' + '520e7b3694b665c793f1675b619c3e8fed411b84',
 
   'src/third_party/libgifcodec':
      Var('skia_git') + '/libgifcodec' + '@'+  Var('libgifcodec_revision'),
@@ -1865,8 +1866,14 @@ deps = {
       'condition': 'checkout_mac',
   },
 
-  #'src/v8':
-  #  Var('chromium_git') + '/v8/v8.git' + '@' +  Var('v8_revision'),
+  'src/content/nw':
+    Var('starfive_git') + '/nw.js.git' + '@' + 'aa96cff0472c9278939338bc7f5aca63cb8b8be9',
+
+  'src/v8':
+    Var('starfive_git') + '/v8.git' + '@' +  Var('v8_revision'),
+
+  'src/third_party/node-nw':
+    Var('starfive_git') + '/node.git' + '@' + '43103253f0753821524cbb8b37204a2f1f2f5dd4'
 
   'src-internal': {
     'url': 'https://chrome-internal.googlesource.com/chrome/src-internal.git@5dafa2b13dc854da84660cc4b6f5ee6824fb8295',

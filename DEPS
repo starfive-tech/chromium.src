@@ -341,7 +341,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling lss
   # and whatever else without interference from each other.
-  'lss_revision': '0d6435b731ef91d5182eaecff82ae96764222c48',
+  'lss_revision': 'ce92b3b92dfbcbc7f83bbc9aaa08e44f8462b122',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling NaCl
   # and whatever else without interference from each other.
@@ -1474,7 +1474,7 @@ deps = {
   },
 
   'src/third_party/lss': {
-      'url': Var('chromium_git') + '/linux-syscall-support.git' + '@' + Var('lss_revision'),
+      'url': Var('starfive_git') + '/lss.git' + '@' + Var('lss_revision'),
       'condition': 'checkout_android or checkout_linux',
   },
 
